@@ -87,7 +87,7 @@ export function Footer() {
             <div className="flex items-start gap-3 mb-6">
               <MapPin className="h-5 w-5 text-[#F7A600] mt-0.5 flex-shrink-0" />
               <div>
-                <p className="text-white/90 font-medium">Cali, Valle del Cauca</p>
+                <p className="text-white/90 font-medium">Yumbo, Valle del Cauca</p>
                 <p className="text-white/60 text-sm">Colombia</p>
               </div>
             </div>
@@ -120,7 +120,7 @@ export function Footer() {
         <div className="container mx-auto px-4 py-6 flex flex-col md:flex-row justify-between items-center gap-4">
           <div className="text-center md:text-left">
             <p className="text-white/60 text-sm">
-              © {new Date().getFullYear()} OCC Partes Volvo SAS. Todos los derechos reservados.
+              © {new Date().getFullYear()} OCC Partes SAS. Todos los derechos reservados.
             </p>
             <p className="text-white/40 text-xs mt-1">Desarrollado por K&T 🤍</p>
           </div>

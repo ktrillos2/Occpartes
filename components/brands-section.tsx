@@ -35,7 +35,20 @@ const brandCategories = [
     id: "others",
     name: "Otras Marcas Atendidas",
     description: "Amplia cobertura en el sector industrial",
-    brands: ["Wacker Neuson", "Bobcat", "JCB", "Scandia", "Trelleborg OTR"],
+    brands: [
+      "Wacker Neuson",
+      "Bobcat",
+      "JCB",
+      "Scandia",
+      "Trelleborg OTR",
+      "Zoomlion",
+      "CASE",
+      "Hyundai",
+      "SDLG",
+      "Caterpillar",
+      "Sennebogen",
+      "Kobelco",
+    ],
     color: "#718096",
     featured: false,
   },
@@ -79,8 +92,8 @@ export function BrandsSection() {
               key={category.id}
               onClick={() => setActiveCategory(category.id)}
               className={`px-6 py-3 rounded-full font-semibold transition-all duration-300 ${activeCategory === category.id
-                  ? "bg-[#1E4B8E] text-white shadow-lg scale-105"
-                  : "bg-white text-[#4A5568] hover:bg-[#1E4B8E]/10 hover:text-[#1E4B8E]"
+                ? "bg-[#1E4B8E] text-white shadow-lg scale-105"
+                : "bg-white text-[#4A5568] hover:bg-[#1E4B8E]/10 hover:text-[#1E4B8E]"
                 }`}
             >
               {category.name}

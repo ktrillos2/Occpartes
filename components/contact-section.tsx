@@ -21,7 +21,7 @@ const contactInfo = [
   {
     icon: MapPin,
     label: "Ubicación",
-    value: "Cali, Valle del Cauca, Colombia",
+    value: "Yumbo, Valle del Cauca, Colombia",
     href: "#",
   },
   {

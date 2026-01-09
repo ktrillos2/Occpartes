@@ -32,8 +32,8 @@ const services = [
     icon: IconDiagnostics,
     title: "Diagnóstico Electrónico Avanzado",
     description:
-      "Herramientas Nexiq especializadas para diagnóstico de equipos CASE Construction, Volvo, Kobelco y New Holland.",
-    highlight: "Tecnología Nexiq",
+      "Herramientas VCADS Pro herramienta diagnóstico volvo y CNH DPA 5 para equipos CASE, New Holland, Kobelco",
+    highlight: "Herramienta de diagnostico",
   },
   {
     icon: IconEmergency,

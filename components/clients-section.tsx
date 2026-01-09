@@ -10,10 +10,10 @@ const clients = [
   { name: "Siderúrgica de Occidente – SIDOC", location: "Acopi-Valle" },
   { name: "Agregados Y Mezclas Cachibi", location: "Acopi-Valle" },
   { name: "Cesconstrucciones", location: "Cali-Valle" },
-  { name: "Obcipol", location: "Bogotá" },
-  { name: "Amezquita Naranjo", location: "Jamundí-Valle" },
+  { name: "Perea y CIA SA", location: "Yumbo-Valle" },
+  { name: "Italcol SA", location: "Buenaventura-Valle" },
   { name: "Ingeinco", location: "Villavicencio-Meta" },
-  { name: "Mercovil", location: "Acopi-Valle" },
+  { name: "Natrio SA", location: "Buenaventura-Valle" },
   { name: "Maquinaria Zwein", location: "Florida-Valle" },
 ]
 

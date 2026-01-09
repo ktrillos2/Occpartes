@@ -30,9 +30,9 @@ const heroSlides = [
 ]
 
 const serviceHighlights = [
-  { number: "01", title: "Repuestos Originales", desc: "Partes certificadas SLP con 24 meses de garantía" },
-  { number: "02", title: "Servicio Técnico", desc: "Diagnóstico avanzado con herramientas Nexiq" },
-  { number: "03", title: "Logística Express", desc: "Entrega en 7 días con inventario local" },
+  { number: "01", title: "Repuestos Originales", desc: "Suministro de partes originales volvo, alternativos SLP con 24 meses de garantia y OEM" },
+  { number: "02", title: "Servicio Técnico", desc: "Herramienta de diagnostico VCADS Pro y CNH DPA 5" },
+  { number: "03", title: "Logística Express", desc: "Importaciones entrega 7 dias, partes disponibles local" },
   { number: "04", title: "Emergencias 24/7", desc: "Soporte en campo para tu operación" },
 ]
 
@@ -153,11 +153,10 @@ export function HeroSection() {
               {serviceHighlights.map((service, index) => (
                 <motion.div
                   key={index}
-                  className={`group relative p-5 rounded-sm cursor-pointer transition-all duration-500 ${
-                    hoveredService === index
+                  className={`group relative p-5 rounded-sm cursor-pointer transition-all duration-500 ${hoveredService === index
                       ? "bg-[#F7A600] shadow-[0_0_30px_rgba(247,166,0,0.3)]"
                       : "bg-white/5 backdrop-blur-sm hover:bg-white/10"
-                  }`}
+                    }`}
                   onMouseEnter={() => setHoveredService(index)}
                   onMouseLeave={() => setHoveredService(null)}
                   initial={{ opacity: 0, x: 30 }}
@@ -166,34 +165,30 @@ export function HeroSection() {
                 >
                   <div className="flex items-start gap-4">
                     <span
-                      className={`text-3xl font-black transition-colors duration-300 ${
-                        hoveredService === index ? "text-[#0A1628]" : "text-[#F7A600]"
-                      }`}
+                      className={`text-3xl font-black transition-colors duration-300 ${hoveredService === index ? "text-[#0A1628]" : "text-[#F7A600]"
+                        }`}
                     >
                       {service.number}
                     </span>
                     <div className="flex-1">
                       <h3
-                        className={`text-lg font-bold mb-1 transition-colors duration-300 ${
-                          hoveredService === index ? "text-[#0A1628]" : "text-white"
-                        }`}
+                        className={`text-lg font-bold mb-1 transition-colors duration-300 ${hoveredService === index ? "text-[#0A1628]" : "text-white"
+                          }`}
                       >
                         {service.title}
                       </h3>
                       <p
-                        className={`text-sm transition-colors duration-300 ${
-                          hoveredService === index ? "text-[#0A1628]/80" : "text-white/60"
-                        }`}
+                        className={`text-sm transition-colors duration-300 ${hoveredService === index ? "text-[#0A1628]/80" : "text-white/60"
+                          }`}
                       >
                         {service.desc}
                       </p>
                     </div>
                     <ArrowRight
-                      className={`h-5 w-5 transform transition-all duration-300 ${
-                        hoveredService === index
+                      className={`h-5 w-5 transform transition-all duration-300 ${hoveredService === index
                           ? "text-[#0A1628] translate-x-1 opacity-100"
                           : "text-white/30 opacity-0"
-                      }`}
+                        }`}
                     />
                   </div>
                 </motion.div>
@@ -239,9 +234,8 @@ export function HeroSection() {
               <button
                 key={index}
                 onClick={() => setCurrentSlide(index)}
-                className={`h-1 rounded-full transition-all duration-500 ${
-                  index === currentSlide ? "w-8 bg-[#F7A600]" : "w-4 bg-white/30 hover:bg-white/50"
-                }`}
+                className={`h-1 rounded-full transition-all duration-500 ${index === currentSlide ? "w-8 bg-[#F7A600]" : "w-4 bg-white/30 hover:bg-white/50"
+                  }`}
                 aria-label={`Ir a slide ${index + 1}`}
               />
             ))}
