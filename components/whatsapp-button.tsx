@@ -4,7 +4,7 @@ import { motion } from "framer-motion"
 import Image from "next/image"
 
 export function WhatsAppButton() {
-  const phoneNumber = "573000000000" // Reemplazar con el número real
+  const phoneNumber = "573218644235"
   const message = "Hola, estoy interesado en los servicios de OCC Partes. ¿Podrían ayudarme?"
 
   const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`
