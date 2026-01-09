@@ -1,0 +1,64 @@
+import type React from "react"
+import type { Metadata } from "next"
+import { Manrope } from "next/font/google"
+import { Analytics } from "@vercel/analytics/next"
+import "./globals.css"
+
+const manrope = Manrope({
+  subsets: ["latin"],
+  variable: "--font-manrope",
+  weight: ["300", "400", "500", "600", "700", "800"],
+})
+
+export const metadata: Metadata = {
+  title: "OCC Partes | Soluciones en Equipos Premium - Repuestos Volvo Colombia",
+  description:
+    "Más de 15 años de experiencia en repuestos y servicios para equipos Volvo. Distribuidores autorizados SLP en Colombia. Mantenimiento, diagnóstico y partes para maquinaria de construcción, camiones y buses.",
+  keywords: [
+    "repuestos volvo",
+    "maquinaria pesada colombia",
+    "SLP colombia",
+    "mantenimiento volvo",
+    "OCC Partes",
+    "equipos construcción",
+  ],
+  generator: "v0.app",
+  openGraph: {
+    title: "OCC Partes | Soluciones en Equipos Premium",
+    description: "Distribuidores autorizados de repuestos Volvo y SLP en Colombia",
+    locale: "es_CO",
+    type: "website",
+  },
+  icons: {
+    icon: [
+      {
+        url: "/icon-light-32x32.png",
+        media: "(prefers-color-scheme: light)",
+      },
+      {
+        url: "/icon-dark-32x32.png",
+        media: "(prefers-color-scheme: dark)",
+      },
+      {
+        url: "/icon.svg",
+        type: "image/svg+xml",
+      },
+    ],
+    apple: "/apple-icon.png",
+  },
+}
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode
+}>) {
+  return (
+    <html lang="es" className="scroll-smooth">
+      <body className={`${manrope.variable} font-sans antialiased`}>
+        {children}
+        <Analytics />
+      </body>
+    </html>
+  )
+}
