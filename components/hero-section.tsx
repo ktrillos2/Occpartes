@@ -32,7 +32,7 @@ const heroSlides = [
 const serviceHighlights = [
   { number: "01", title: "Repuestos Originales", desc: "Suministro de partes originales volvo, alternativos SLP con 24 meses de garantia y OEM" },
   { number: "02", title: "Servicio Técnico", desc: "Herramienta de diagnostico VCADS Pro y CNH DPA 5" },
-  { number: "03", title: "Logística Express", desc: "Importaciones entrega 7 dias, partes disponibles local" },
+  { number: "03", title: "Logística Express", desc: "Importaciones entrega en 7 dias (Partes disponibles en local)" },
   { number: "04", title: "Emergencias 24/7", desc: "Soporte en campo para tu operación" },
 ]
 
@@ -154,8 +154,8 @@ export function HeroSection() {
                 <motion.div
                   key={index}
                   className={`group relative p-5 rounded-sm cursor-pointer transition-all duration-500 ${hoveredService === index
-                      ? "bg-[#F7A600] shadow-[0_0_30px_rgba(247,166,0,0.3)]"
-                      : "bg-white/5 backdrop-blur-sm hover:bg-white/10"
+                    ? "bg-[#F7A600] shadow-[0_0_30px_rgba(247,166,0,0.3)]"
+                    : "bg-white/5 backdrop-blur-sm hover:bg-white/10"
                     }`}
                   onMouseEnter={() => setHoveredService(index)}
                   onMouseLeave={() => setHoveredService(null)}
@@ -186,8 +186,8 @@ export function HeroSection() {
                     </div>
                     <ArrowRight
                       className={`h-5 w-5 transform transition-all duration-300 ${hoveredService === index
-                          ? "text-[#0A1628] translate-x-1 opacity-100"
-                          : "text-white/30 opacity-0"
+                        ? "text-[#0A1628] translate-x-1 opacity-100"
+                        : "text-white/30 opacity-0"
                         }`}
                     />
                   </div>
