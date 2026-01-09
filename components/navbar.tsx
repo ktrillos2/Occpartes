@@ -35,11 +35,11 @@ export function Navbar() {
         <div className="container mx-auto px-4 flex justify-between items-center text-sm">
           <div className="flex items-center gap-6">
             <a
-              href="mailto:occpartes1@gmail.com"
+              href="mailto:occpartesvolvo@gmail.com"
               className="flex items-center gap-2 hover:text-[#F7A600] transition-colors"
             >
               <Mail className="h-4 w-4" />
-              occpartes1@gmail.com
+              occpartesvolvo@gmail.com
             </a>
             <span className="flex items-center gap-2">
               <Phone className="h-4 w-4" />
@@ -54,9 +54,8 @@ export function Navbar() {
 
       {/* Main Navbar */}
       <motion.header
-        className={`sticky top-0 z-50 transition-all duration-300 ${
-          scrolled ? "bg-white/95 backdrop-blur-md shadow-lg" : "bg-white"
-        }`}
+        className={`sticky top-0 z-50 transition-all duration-300 ${scrolled ? "bg-white/95 backdrop-blur-md shadow-lg" : "bg-white"
+          }`}
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.5 }}

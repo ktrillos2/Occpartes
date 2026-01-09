@@ -1,7 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Mail, MapPin, ArrowUp, Shield, Award, CheckCircle } from "lucide-react"
+import { Mail, MapPin, ArrowUp, Shield, Award, CheckCircle, Phone } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
 
@@ -43,13 +43,28 @@ export function Footer() {
               Más de 15 años brindando soluciones integrales en repuestos y servicios para maquinaria pesada Volvo en
               Colombia.
             </p>
-            <div className="flex items-center gap-3 text-sm">
-              <div className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center">
-                <Mail className="h-4 w-4 text-[#F7A600]" />
+            <div className="flex flex-col gap-4">
+              <div className="flex items-center gap-3 text-sm">
+                <div className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center">
+                  <Mail className="h-4 w-4 text-[#F7A600]" />
+                </div>
+                <a href="mailto:occpartesvolvo@gmail.com" className="hover:text-[#F7A600] transition-colors">
+                  occpartesvolvo@gmail.com
+                </a>
               </div>
-              <a href="mailto:occpartes1@gmail.com" className="hover:text-[#F7A600] transition-colors">
-                occpartes1@gmail.com
-              </a>
+              <div className="flex items-center gap-3 text-sm">
+                <div className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center">
+                  <Phone className="h-4 w-4 text-[#F7A600]" />
+                </div>
+                <div className="flex flex-col">
+                  <a href="tel:3218644235" className="hover:text-[#F7A600] transition-colors">
+                    321 864 4235
+                  </a>
+                  <a href="tel:3166909756" className="hover:text-[#F7A600] transition-colors">
+                    316 690 9756
+                  </a>
+                </div>
+              </div>
             </div>
           </div>
 

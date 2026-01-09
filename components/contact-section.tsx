@@ -5,7 +5,7 @@ import type React from "react"
 import { motion } from "framer-motion"
 import { useInView } from "framer-motion"
 import { useRef, useState } from "react"
-import { Mail, MapPin, Send, Clock, MessageSquare } from "lucide-react"
+import { Mail, MapPin, Send, Clock, MessageSquare, Phone } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
@@ -15,8 +15,14 @@ const contactInfo = [
   {
     icon: Mail,
     label: "Email",
-    value: "occpartes1@gmail.com",
-    href: "mailto:occpartes1@gmail.com",
+    value: "occpartesvolvo@gmail.com",
+    href: "mailto:occpartesvolvo@gmail.com",
+  },
+  {
+    icon: Phone,
+    label: "Celular",
+    value: "321 864 4235 - 316 690 9756",
+    href: "tel:3218644235",
   },
   {
     icon: MapPin,
