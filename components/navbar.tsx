@@ -66,9 +66,9 @@ export function Navbar() {
               <Image
                 src="/images/logo-occpartes-png.png"
                 alt="OCC Partes - Soluciones en Equipos Premium"
-                width={180}
-                height={60}
-                className="h-14 w-auto"
+                width={240}
+                height={80}
+                className="h-20 w-auto"
                 priority
               />
             </Link>

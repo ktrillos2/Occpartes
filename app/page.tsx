@@ -8,6 +8,7 @@ import { ClientsSection } from "@/components/clients-section"
 import { ContactSection } from "@/components/contact-section"
 import { Footer } from "@/components/footer"
 import { WhatsAppButton } from "@/components/whatsapp-button"
+import { SlpCatalogSection } from "@/components/slp-catalog-section"
 import { LoadingScreen } from "@/components/loading-screen"
 
 export default function Home() {
@@ -19,6 +20,7 @@ export default function Home() {
       <AboutSection />
       <ServicesSection />
       <BrandsSection />
+      <SlpCatalogSection />
       <GalleryCarousel />
       <ClientsSection />
       <ContactSection />
