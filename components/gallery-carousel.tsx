@@ -8,6 +8,8 @@ import Image from "next/image"
 import { ChevronLeft, ChevronRight, Pause, Play } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
+import { urlFor } from "@/lib/sanity.image"
+
 const galleryImages = [
   {
     src: "/images/volvo-203.jpg",
@@ -41,25 +43,32 @@ const galleryImages = [
   },
 ]
 
-export function GalleryCarousel() {
+export function GalleryCarousel({ data }: { data?: any }) {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [isPlaying, setIsPlaying] = useState(true)
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: "-100px" })
 
+  const images = data?.images || galleryImages
+
   const nextSlide = useCallback(() => {
-    setCurrentIndex((prev) => (prev + 1) % galleryImages.length)
-  }, [])
+    setCurrentIndex((prev) => (prev + 1) % images.length)
+  }, [images.length])
 
   const prevSlide = useCallback(() => {
-    setCurrentIndex((prev) => (prev - 1 + galleryImages.length) % galleryImages.length)
-  }, [])
+    setCurrentIndex((prev) => (prev - 1 + images.length) % images.length)
+  }, [images.length])
 
   useEffect(() => {
-    if (!isPlaying) return
+    if (!isPlaying || !images.length) return
     const interval = setInterval(nextSlide, 5000)
     return () => clearInterval(interval)
-  }, [isPlaying, nextSlide])
+  }, [isPlaying, nextSlide, images.length])
+
+  const getImgSrc = (image: any, index: number) => {
+    if (image?.image?.asset?._ref) return urlFor(image.image)?.url() || images[index].src
+    return image.src || images[index].src
+  }
 
   return (
     <section className="py-20 md:py-28 bg-[#1E4B8E]" ref={ref}>
@@ -70,12 +79,12 @@ export function GalleryCarousel() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
         >
-          <span className="text-[#F7A600] font-semibold text-sm uppercase tracking-wider">Nuestra Flota</span>
+          <span className="text-[#F7A600] font-semibold text-sm uppercase tracking-wider">{data?.sectionBadge || "Nuestra Flota"}</span>
           <h2 className="text-3xl md:text-4xl font-extrabold text-white mt-2 mb-4">
-            Galería de <span className="text-[#F7A600]">Equipos Premium</span>
+            {data?.title || "Galería de"} <span className="text-[#F7A600]">{data?.titleHighlight || "Equipos Premium"}</span>
           </h2>
           <p className="text-white/80 leading-relaxed">
-            Conoce la variedad de maquinaria Volvo que atendemos y mantenemos para nuestros clientes en toda Colombia.
+            {data?.description || "Conoce la variedad de maquinaria Volvo que atendemos y mantenemos para nuestros clientes en toda Colombia."}
           </p>
         </motion.div>
 
@@ -97,8 +106,8 @@ export function GalleryCarousel() {
                 className="absolute inset-0"
               >
                 <Image
-                  src={galleryImages[currentIndex].src || "/placeholder.svg"}
-                  alt={galleryImages[currentIndex].alt}
+                  src={getImgSrc(images[currentIndex], currentIndex) || "/placeholder.svg"}
+                  alt={images[currentIndex]?.alt || images[currentIndex]?.title || ""}
                   fill
                   className="object-cover"
                   priority
@@ -112,28 +121,32 @@ export function GalleryCarousel() {
                   transition={{ delay: 0.3 }}
                 >
                   <h3 className="text-white font-bold text-2xl md:text-3xl mb-2">
-                    {galleryImages[currentIndex].title}
+                    {images[currentIndex]?.title}
                   </h3>
-                  <p className="text-white/80 text-lg">{galleryImages[currentIndex].description}</p>
+                  <p className="text-white/80 text-lg">{images[currentIndex]?.description}</p>
                 </motion.div>
               </motion.div>
             </AnimatePresence>
 
             {/* Navigation Arrows */}
-            <button
-              onClick={prevSlide}
-              className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/40 backdrop-blur-sm p-3 rounded-full transition-all duration-300 group"
-              aria-label="Anterior"
-            >
-              <ChevronLeft className="h-6 w-6 text-white group-hover:scale-110 transition-transform" />
-            </button>
-            <button
-              onClick={nextSlide}
-              className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/40 backdrop-blur-sm p-3 rounded-full transition-all duration-300 group"
-              aria-label="Siguiente"
-            >
-              <ChevronRight className="h-6 w-6 text-white group-hover:scale-110 transition-transform" />
-            </button>
+            {images.length > 1 && (
+              <>
+                <button
+                  onClick={prevSlide}
+                  className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/40 backdrop-blur-sm p-3 rounded-full transition-all duration-300 group"
+                  aria-label="Anterior"
+                >
+                  <ChevronLeft className="h-6 w-6 text-white group-hover:scale-110 transition-transform" />
+                </button>
+                <button
+                  onClick={nextSlide}
+                  className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/40 backdrop-blur-sm p-3 rounded-full transition-all duration-300 group"
+                  aria-label="Siguiente"
+                >
+                  <ChevronRight className="h-6 w-6 text-white group-hover:scale-110 transition-transform" />
+                </button>
+              </>
+            )}
           </div>
 
           {/* Controls and Indicators */}
@@ -150,13 +163,12 @@ export function GalleryCarousel() {
 
             {/* Dot Indicators */}
             <div className="flex gap-2">
-              {galleryImages.map((_, index) => (
+              {images.map((_: any, index: number) => (
                 <button
                   key={index}
                   onClick={() => setCurrentIndex(index)}
-                  className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                    index === currentIndex ? "bg-[#F7A600] w-8" : "bg-white/40 hover:bg-white/60"
-                  }`}
+                  className={`w-3 h-3 rounded-full transition-all duration-300 ${index === currentIndex ? "bg-[#F7A600] w-8" : "bg-white/40 hover:bg-white/60"
+                    }`}
                   aria-label={`Ir a imagen ${index + 1}`}
                 />
               ))}
@@ -164,7 +176,7 @@ export function GalleryCarousel() {
 
             {/* Counter */}
             <span className="text-white/80 font-medium">
-              {currentIndex + 1} / {galleryImages.length}
+              {currentIndex + 1} / {images.length}
             </span>
           </div>
         </motion.div>
@@ -176,19 +188,18 @@ export function GalleryCarousel() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.4 }}
         >
-          {galleryImages.map((image, index) => (
+          {images.map((image: any, index: number) => (
             <motion.button
               key={index}
               onClick={() => setCurrentIndex(index)}
-              className={`relative w-20 h-14 md:w-28 md:h-20 rounded-lg overflow-hidden flex-shrink-0 transition-all duration-300 ${
-                index === currentIndex
+              className={`relative w-20 h-14 md:w-28 md:h-20 rounded-lg overflow-hidden flex-shrink-0 transition-all duration-300 ${index === currentIndex
                   ? "ring-2 ring-[#F7A600] ring-offset-2 ring-offset-[#1E4B8E] scale-105"
                   : "opacity-60 hover:opacity-100"
-              }`}
+                }`}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              <Image src={image.src || "/placeholder.svg"} alt={image.alt} fill className="object-cover" />
+              <Image src={getImgSrc(image, index) || "/placeholder.svg"} alt={image.alt || ""} fill className="object-cover" />
             </motion.button>
           ))}
         </motion.div>

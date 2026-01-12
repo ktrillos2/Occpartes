@@ -6,6 +6,8 @@ import { useRef, useState } from "react"
 import { ChevronRight, ExternalLink } from "lucide-react"
 import Image from "next/image"
 
+import { urlFor } from "@/lib/sanity.image"
+
 const brandCategories = [
   {
     id: "volvo",
@@ -54,12 +56,14 @@ const brandCategories = [
   },
 ]
 
-export function BrandsSection() {
+export function BrandsSection({ data }: { data?: any }) {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: "-100px" })
   const [activeCategory, setActiveCategory] = useState("volvo")
 
-  const activeData = brandCategories.find((cat) => cat.id === activeCategory)
+  const categories = data?.categories || brandCategories
+  const activeData = categories.find((cat: any) => cat.id === activeCategory)
+  const promoCard = data?.promoCard
 
   return (
     <section id="marcas" className="py-20 md:py-28 bg-[#F7F9FC]" ref={ref}>
@@ -71,13 +75,12 @@ export function BrandsSection() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
         >
-          <span className="text-[#F7A600] font-semibold text-sm uppercase tracking-wider">Nuestras Marcas</span>
+          <span className="text-[#F7A600] font-semibold text-sm uppercase tracking-wider">{data?.sectionBadge || "Nuestras Marcas"}</span>
           <h2 className="text-3xl md:text-4xl font-extrabold text-[#2D3748] mt-2 mb-4">
-            Aliados de las <span className="text-[#1E4B8E]">Mejores Marcas</span>
+            {data?.title || "Aliados de las"} <span className="text-[#1E4B8E]">{data?.titleHighlight || "Mejores Marcas"}</span>
           </h2>
           <p className="text-[#4A5568] leading-relaxed">
-            Trabajamos con las marcas líderes del sector industrial para garantizar la máxima calidad en repuestos y
-            servicios.
+            {data?.description || "Trabajamos con las marcas líderes del sector industrial para garantizar la máxima calidad en repuestos y servicios."}
           </p>
         </motion.div>
 
@@ -87,7 +90,7 @@ export function BrandsSection() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5, delay: 0.2 }}
         >
-          {brandCategories.map((category) => (
+          {categories.map((category: any) => (
             <button
               key={category.id}
               onClick={() => setActiveCategory(category.id)}
@@ -122,7 +125,7 @@ export function BrandsSection() {
           </div>
 
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-            {activeData?.brands.map((brand, index) => (
+            {activeData?.brands.map((brand: string, index: number) => (
               <motion.div
                 key={brand}
                 initial={{ opacity: 0, scale: 0.9 }}
@@ -146,16 +149,21 @@ export function BrandsSection() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.4 }}
         >
-          <Image src="/images/image.png" alt="Brochure OCC Partes" fill className="object-cover object-top" />
+          <Image
+            src={promoCard?.image?.asset?._ref ? urlFor(promoCard.image)!.url() : "/images/image.png"}
+            alt={promoCard?.title || "Brochure OCC Partes"}
+            fill
+            className="object-cover object-top"
+          />
           <div className="absolute inset-0 bg-gradient-to-r from-[#1E4B8E]/90 via-[#1E4B8E]/60 to-transparent flex items-center">
             <div className="p-8 md:p-12 max-w-xl">
-              <h3 className="text-2xl md:text-3xl font-bold text-white mb-3">100% Cobertura en Repuestos Volvo</h3>
-              <p className="text-white/90 mb-4">Partes originales y alternativas con garantía SLP de 24 meses.</p>
+              <h3 className="text-2xl md:text-3xl font-bold text-white mb-3">{promoCard?.title || "100% Cobertura en Repuestos Volvo"}</h3>
+              <p className="text-white/90 mb-4">{promoCard?.text || "Partes originales y alternativas con garantía SLP de 24 meses."}</p>
               <a
                 href="#contacto"
                 className="inline-flex items-center gap-2 bg-[#F7A600] text-[#2D3748] font-bold px-6 py-3 rounded-full hover:bg-[#FFBE3D] transition-colors"
               >
-                Consultar Disponibilidad
+                {promoCard?.buttonText || "Consultar Disponibilidad"}
                 <ChevronRight className="h-5 w-5" />
               </a>
             </div>

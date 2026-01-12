@@ -6,7 +6,7 @@ import { useRef } from "react"
 import { ExternalLink } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
-export function SlpCatalogSection() {
+export function SlpCatalogSection({ data }: { data?: any }) {
     const ref = useRef(null)
     const isInView = useInView(ref, { once: true, margin: "-100px" })
 
@@ -18,18 +18,17 @@ export function SlpCatalogSection() {
                         <div className="p-8 md:p-12 lg:p-16">
                             <motion.div
                                 initial={{ opacity: 0, x: -50 }}
-                                animate={isInView ? { opacity: 1, x: 0 } : {}}
+                                animate={isInView ? { opacity: 1, y: 0 } : {}}
                                 transition={{ duration: 0.6 }}
                             >
                                 <div className="inline-block bg-[#F7A600] text-[#1E4B8E] font-bold px-4 py-1 rounded-full text-sm mb-6">
-                                    CATÁLOGO OFICIAL
+                                    {data?.badgeText || "CATÁLOGO OFICIAL"}
                                 </div>
                                 <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6">
-                                    Catálogo Swedish Lorry Parts (SLP)
+                                    {data?.title || "Catálogo Swedish Lorry Parts (SLP)"}
                                 </h2>
                                 <p className="text-white/90 text-lg mb-8 leading-relaxed">
-                                    Acceda al catálogo completo de repuestos de alta calidad.<br />
-                                    Encuentre la pieza exacta que necesita con la garantía y respaldo de SLP.
+                                    {data?.description || "Acceda al catálogo completo de repuestos de alta calidad.\nEncuentre la pieza exacta que necesita con la garantía y respaldo de SLP."}
                                 </p>
 
                                 <div className="flex flex-col sm:flex-row gap-4">
@@ -38,8 +37,8 @@ export function SlpCatalogSection() {
                                         size="lg"
                                         className="bg-[#F7A600] hover:bg-[#FFBE3D] text-[#1E4B8E] font-bold text-lg h-14 px-8"
                                     >
-                                        <a href="https://slp.se/es" target="_blank" rel="noopener noreferrer">
-                                            Ver Catálogo Online
+                                        <a href={data?.catalogUrl || "https://slp.se/es"} target="_blank" rel="noopener noreferrer">
+                                            {data?.buttonText || "Ver Catálogo Online"}
                                             <ExternalLink className="ml-2 h-5 w-5" />
                                         </a>
                                     </Button>

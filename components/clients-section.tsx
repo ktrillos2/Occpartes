@@ -6,6 +6,8 @@ import { useRef } from "react"
 import { MapPin, CheckCircle2 } from "lucide-react"
 import Image from "next/image"
 
+import { urlFor } from "@/lib/sanity.image"
+
 const clients = [
   { name: "Siderúrgica de Occidente – SIDOC", location: "Acopi-Valle" },
   { name: "Agregados Y Mezclas Cachibi", location: "Acopi-Valle" },
@@ -17,9 +19,13 @@ const clients = [
   { name: "Maquinaria Zwein", location: "Florida-Valle" },
 ]
 
-export function ClientsSection() {
+export function ClientsSection({ data }: { data?: any }) {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: "-100px" })
+
+  const clientsList = data?.clientsList || clients
+  const featuredImage = data?.featuredImage
+  const stats = data?.stats || { number: "8+", text: "Empresas aliadas" }
 
   return (
     <section id="clientes" className="py-20 md:py-28 bg-white" ref={ref}>
@@ -30,13 +36,12 @@ export function ClientsSection() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
         >
-          <span className="text-[#F7A600] font-semibold text-sm uppercase tracking-wider">Nuestros Clientes</span>
+          <span className="text-[#F7A600] font-semibold text-sm uppercase tracking-wider">{data?.sectionBadge || "Nuestros Clientes"}</span>
           <h2 className="text-3xl md:text-4xl font-extrabold text-[#2D3748] mt-2 mb-4">
-            Clientes que <span className="text-[#1E4B8E]">Confían</span> en Nosotros
+            {data?.title || "Clientes que"} <span className="text-[#1E4B8E]">{data?.titleHighlight || "Confían"}</span> {data?.titleSuffix || "en Nosotros"}
           </h2>
           <p className="text-[#4A5568] leading-relaxed">
-            Empresas líderes del sector industrial en Colombia han elegido a OCC Partes como su aliado estratégico para
-            el mantenimiento y suministro de repuestos de su maquinaria pesada.
+            {data?.description || "Empresas líderes del sector industrial en Colombia han elegido a OCC Partes como su aliado estratégico para el mantenimiento y suministro de repuestos de su maquinaria pesada."}
           </p>
         </motion.div>
 
@@ -48,7 +53,7 @@ export function ClientsSection() {
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.7 }}
           >
-            {clients.map((client, index) => (
+            {clientsList.map((client: any, index: number) => (
               <motion.div
                 key={index}
                 className="bg-[#F7F9FC] rounded-xl p-5 flex items-start gap-3 hover:shadow-lg hover:bg-white transition-all duration-300 border border-transparent hover:border-[#F7A600]/20"
@@ -76,15 +81,15 @@ export function ClientsSection() {
           >
             <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl group">
               <Image
-                src="/images/fmx.jpg"
-                alt="Camión Volvo FMX Max"
+                src={featuredImage?.asset?._ref ? urlFor(featuredImage)!.url() : "/images/fmx.jpg"}
+                alt={data?.imageTitle || "Camión Volvo FMX Max"}
                 fill
                 className="object-cover group-hover:scale-105 transition-transform duration-700"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
               <div className="absolute bottom-4 left-4 right-4">
-                <p className="text-white font-bold text-lg">Volvo FMX Max</p>
-                <p className="text-white/80 text-sm">Potencia y rendimiento excepcional</p>
+                <p className="text-white font-bold text-lg">{data?.imageTitle || "Volvo FMX Max"}</p>
+                <p className="text-white/80 text-sm">{data?.imageSubtitle || "Potencia y rendimiento excepcional"}</p>
               </div>
             </div>
             {/* Floating Badge */}
@@ -94,8 +99,8 @@ export function ClientsSection() {
               animate={isInView ? { opacity: 1, scale: 1 } : {}}
               transition={{ duration: 0.5, delay: 0.5 }}
             >
-              <p className="font-extrabold text-4xl">8+</p>
-              <p className="font-medium text-sm">Empresas aliadas</p>
+              <p className="font-extrabold text-4xl">{stats.number}</p>
+              <p className="font-medium text-sm">{stats.text}</p>
             </motion.div>
           </motion.div>
         </div>

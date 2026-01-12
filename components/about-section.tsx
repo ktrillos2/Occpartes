@@ -5,6 +5,7 @@ import { useInView } from "framer-motion"
 import { useRef } from "react"
 import { CheckCircle2 } from "lucide-react"
 import Image from "next/image"
+import { urlFor } from "@/lib/sanity.image"
 
 const features = [
   "Cubrimos el 100% del suministro de partes para equipos Volvo",
@@ -33,9 +34,20 @@ const galleryImages = [
   },
 ]
 
-export function AboutSection() {
+export function AboutSection({ data }: { data?: any }) {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: "-100px" })
+
+  const featureList = data?.features || features
+  const title = data?.title || "Expertos en Soluciones para"
+  const titleHighlight = data?.titleHighlight || "Equipos Premium"
+  const description = data?.description || "Somos un grupo humano con más de 15 años de experiencia en la marca Volvo, ofreciendo productos post venta en los segmentos de equipo de construcción, camiones y buses, motores estacionarios y marinos Volvo Penta."
+  const gallery = data?.galleryImages || galleryImages
+
+  const getImgSrc = (item: any, index: number) => {
+    if (item?.image?.asset?._ref) return urlFor(item.image)?.url() || galleryImages[index].src
+    return item.src || galleryImages[index].src
+  }
 
   return (
     <section id="nosotros" className="py-20 md:py-28 bg-white" ref={ref}>
@@ -46,13 +58,12 @@ export function AboutSection() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
         >
-          <span className="text-[#F7A600] font-semibold text-sm uppercase tracking-wider">Quiénes Somos</span>
+          <span className="text-[#F7A600] font-semibold text-sm uppercase tracking-wider">{data?.sectionBadge || "Quiénes Somos"}</span>
           <h2 className="text-3xl md:text-4xl font-extrabold text-[#2D3748] mt-2 mb-4">
-            Expertos en Soluciones para <span className="text-[#1E4B8E]">Equipos Premium</span>
+            {title} <span className="text-[#1E4B8E]">{titleHighlight}</span>
           </h2>
           <p className="text-[#4A5568] leading-relaxed">
-            Somos un grupo humano con más de 15 años de experiencia en la marca Volvo, ofreciendo productos post venta
-            en los segmentos de equipo de construcción, camiones y buses, motores estacionarios y marinos Volvo Penta.
+            {description}
           </p>
         </motion.div>
 
@@ -71,14 +82,14 @@ export function AboutSection() {
                   transition={{ duration: 0.3 }}
                 >
                   <Image
-                    src={galleryImages[0].src || "/placeholder.svg"}
-                    alt={galleryImages[0].alt}
+                    src={getImgSrc(gallery[0], 0)}
+                    alt={gallery[0].alt}
                     fill
                     className="object-cover group-hover:scale-110 transition-transform duration-700"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   <span className="absolute bottom-3 left-3 text-white text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    Excavadora EC220
+                    {gallery[0].caption || "Excavadora EC220"}
                   </span>
                 </motion.div>
                 <motion.div
@@ -87,14 +98,14 @@ export function AboutSection() {
                   transition={{ duration: 0.3 }}
                 >
                   <Image
-                    src={galleryImages[1].src || "/placeholder.svg"}
-                    alt={galleryImages[1].alt}
+                    src={getImgSrc(gallery[1], 1)}
+                    alt={gallery[1].alt}
                     fill
                     className="object-cover group-hover:scale-110 transition-transform duration-700"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   <span className="absolute bottom-3 left-3 text-white text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    L25 Electric
+                    {gallery[1].caption || "L25 Electric"}
                   </span>
                 </motion.div>
               </div>
@@ -105,14 +116,14 @@ export function AboutSection() {
                   transition={{ duration: 0.3 }}
                 >
                   <Image
-                    src={galleryImages[2].src || "/placeholder.svg"}
-                    alt={galleryImages[2].alt}
+                    src={getImgSrc(gallery[2], 2)}
+                    alt={gallery[2].alt}
                     fill
                     className="object-cover group-hover:scale-110 transition-transform duration-700"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   <span className="absolute bottom-3 left-3 text-white text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    Excavación Pesada
+                    {gallery[2].caption || "Excavación Pesada"}
                   </span>
                 </motion.div>
                 <motion.div
@@ -121,14 +132,14 @@ export function AboutSection() {
                   transition={{ duration: 0.3 }}
                 >
                   <Image
-                    src={galleryImages[3].src || "/placeholder.svg"}
-                    alt={galleryImages[3].alt}
+                    src={getImgSrc(gallery[3], 3)}
+                    alt={gallery[3].alt}
                     fill
                     className="object-cover group-hover:scale-110 transition-transform duration-700"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   <span className="absolute bottom-3 left-3 text-white text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    Articulado A45G
+                    {gallery[3].caption || "Articulado A45G"}
                   </span>
                 </motion.div>
               </div>
@@ -144,15 +155,19 @@ export function AboutSection() {
             transition={{ duration: 0.7, delay: 0.2 }}
           >
             <p className="text-[#4A5568] leading-relaxed mb-8 text-lg">
-              Como Distribuidores Autorizados de SLP (Swedish Lorry Parts), garantizamos partes alternativas de origen
-              sueco con <strong className="text-[#1E4B8E]">24 meses de garantía</strong>. Nuestra filosofía se basa en
-              compromiso técnico, respuesta oportuna y soluciones confiables que maximizan la productividad de su
-              equipo.
+              {data?.experienceDescription || (
+                <>
+                  Como Distribuidores Autorizados de SLP (Swedish Lorry Parts), garantizamos partes alternativas de origen
+                  sueco con <strong className="text-[#1E4B8E]">24 meses de garantía</strong>. Nuestra filosofía se basa en
+                  compromiso técnico, respuesta oportuna y soluciones confiables que maximizan la productividad de su
+                  equipo.
+                </>
+              )}
             </p>
 
             {/* Features List */}
             <div className="space-y-4 mb-10">
-              {features.map((feature, index) => (
+              {featureList.map((feature: string, index: number) => (
                 <motion.div
                   key={index}
                   className="flex items-start gap-4 p-4 bg-[#F7F9FC] rounded-xl hover:bg-[#1E4B8E]/5 transition-colors duration-300"
