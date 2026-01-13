@@ -28,6 +28,14 @@ export const metadata: Metadata = {
     description: "Distribuidores autorizados de repuestos Volvo y SLP en Colombia",
     locale: "es_CO",
     type: "website",
+    images: [
+      {
+        url: "/images/logo-occpartes-png.png",
+        width: 1200,
+        height: 630,
+        alt: "OCC Partes Logo",
+      },
+    ],
   },
   icons: {
     icon: [
@@ -44,7 +52,7 @@ export const metadata: Metadata = {
         type: "image/svg+xml",
       },
     ],
-    apple: "/apple-icon.png",
+    apple: "/images/logo-occpartes-png.png",
   },
 }
 

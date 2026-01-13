@@ -15,7 +15,7 @@ export function SlpCatalogSection({ data }: { data?: any }) {
             <div className="container mx-auto px-4">
                 <div className="bg-[#1E4B8E] rounded-3xl overflow-hidden shadow-2xl">
                     <div className="grid md:grid-cols-2 gap-8 items-center">
-                        <div className="p-8 md:p-12 lg:p-16">
+                        <div className="pl-10 md:pl-16 lg:pl-24 pr-8 md:pr-12 lg:pr-16 py-12 md:py-16">
                             <motion.div
                                 initial={{ opacity: 0, x: -50 }}
                                 animate={isInView ? { opacity: 1, y: 0 } : {}}
