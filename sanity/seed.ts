@@ -64,7 +64,13 @@ async function seed() {
             { _key: '4', title: 'Volvo FMX', subtitle: 'Camiones de Obra', image: assets.hero4 ? { _type: 'image', asset: { _ref: assets.hero4 } } : undefined },
         ],
         primaryCta: { text: 'Solicitar Cotización', url: 'https://wa.me/573218644235' },
-        secondaryCta: { text: 'Explorar Servicios', url: '#servicios' }
+        secondaryCta: { text: 'Explorar Servicios', url: '#servicios' },
+        serviceHighlights: [
+            { _key: '1', number: "01", title: "Repuestos Originales", description: "Suministro de partes originales volvo, alternativos SLP con 24 meses de garantia y OEM" },
+            { _key: '2', number: "02", title: "Servicio Técnico", description: "Herramienta de diagnostico VCADS Pro y CNH DPA 5" },
+            { _key: '3', number: "03", title: "Logística Express", description: "Importaciones entrega en 7 dias (Partes disponibles en local)" },
+            { _key: '4', number: "04", title: "Emergencias 24/7", description: "Soporte en campo para tu operación" },
+        ]
     }
 
     // 2. About
