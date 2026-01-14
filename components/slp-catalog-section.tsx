@@ -15,13 +15,13 @@ export function SlpCatalogSection({ data }: { data?: any }) {
             <div className="container mx-auto px-4">
                 <div className="bg-[#1E4B8E] rounded-3xl overflow-hidden shadow-2xl">
                     <div className="grid md:grid-cols-2 gap-8 items-center">
-                        <div className="pl-10 md:pl-16 lg:pl-24 pr-8 md:pr-12 lg:pr-16 py-12 md:py-16">
+                        <div className="pl-10 md:pl-16 lg:pl-24 pr-8 md:pr-12 lg:pr-16 py-12 md:py-16 text-center md:text-left">
                             <motion.div
                                 initial={{ opacity: 0, x: -50 }}
-                                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                                animate={isInView ? { opacity: 1, x: 0 } : {}}
                                 transition={{ duration: 0.6 }}
                             >
-                                <div className="inline-block bg-[#F7A600] text-[#1E4B8E] font-bold px-4 py-1 rounded-full text-sm mb-6">
+                                <div className="inline-block bg-[#F7A600] text-[#1E4B8E] font-bold px-4 py-1 rounded-full text-sm mb-6 mx-auto md:mx-0">
                                     {data?.badgeText || "CATÁLOGO OFICIAL"}
                                 </div>
                                 <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6">
@@ -31,7 +31,7 @@ export function SlpCatalogSection({ data }: { data?: any }) {
                                     {data?.description || "Acceda al catálogo completo de repuestos de alta calidad.\nEncuentre la pieza exacta que necesita con la garantía y respaldo de SLP."}
                                 </p>
 
-                                <div className="flex flex-col sm:flex-row gap-4">
+                                <div className="flex flex-col sm:flex-row gap-4 items-center md:items-start justify-center md:justify-start">
                                     <Button
                                         asChild
                                         size="lg"
