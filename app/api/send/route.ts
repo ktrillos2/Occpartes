@@ -4,15 +4,15 @@ import { NextResponse } from 'next/server';
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(request: Request) {
-    try {
-        const body = await request.json();
-        const { name, email, phone, company, message } = body;
+  try {
+    const body = await request.json();
+    const { name, email, phone, company, message } = body;
 
-        const { data, error } = await resend.emails.send({
-            from: 'Acme <onboarding@resend.dev>', // Update this to your verified domain later
-            to: ['occpartesvolvo@gmail.com'], // Reverted to verified email
-            subject: `Nueva solicitud de cotización: ${name}`,
-            html: `
+    const { data, error } = await resend.emails.send({
+      from: 'OccPartes Web <onboarding@resend.dev>', // Update this to your verified domain later
+      to: ['occpartesvolvo@gmail.com'], // Reverted to verified email
+      subject: `Nueva solicitud de cotización: ${name}`,
+      html: `
         <div style="font-family: Arial, sans-serif; color: #333; max-width: 600px; margin: 0 auto; border: 1px solid #e0e0e0; border-radius: 8px; overflow: hidden;">
           <div style="background-color: #1E4B8E; padding: 20px; text-align: center;">
             <h1 style="color: white; margin: 0; font-size: 24px;">Nueva Solicitud de Cotización</h1>
@@ -54,14 +54,14 @@ export async function POST(request: Request) {
           </div>
         </div>
       `,
-        });
+    });
 
-        if (error) {
-            return NextResponse.json({ error }, { status: 500 });
-        }
-
-        return NextResponse.json(data);
-    } catch (error) {
-        return NextResponse.json({ error }, { status: 500 });
+    if (error) {
+      return NextResponse.json({ error }, { status: 500 });
     }
+
+    return NextResponse.json(data);
+  } catch (error) {
+    return NextResponse.json({ error }, { status: 500 });
+  }
 }
