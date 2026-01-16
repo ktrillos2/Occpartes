@@ -9,6 +9,7 @@
   --occ-blue-dark: #153769;
   --occ-yellow: #f7a600;
   --occ-yellow-light: #ffbe3d;
+  --occ-yellow-dark: #b37600; /* Darker shade for text contrast > 4.5:1 */
   --occ-gray-dark: #2d3748;
   --occ-gray: #4a5568;
   --occ-gray-light: #718096;
@@ -93,6 +94,7 @@
   --color-occ-blue-dark: var(--occ-blue-dark);
   --color-occ-yellow: var(--occ-yellow);
   --color-occ-yellow-light: var(--occ-yellow-light);
+  --color-occ-yellow-dark: var(--occ-yellow-dark);
   --color-occ-gray-dark: var(--occ-gray-dark);
   --color-occ-gray: var(--occ-gray);
   --color-occ-gray-light: var(--occ-gray-light);

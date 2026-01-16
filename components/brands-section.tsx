@@ -75,7 +75,7 @@ export function BrandsSection({ data }: { data?: any }) {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
         >
-          <span className="text-[#F7A600] font-semibold text-sm uppercase tracking-wider">{data?.sectionBadge || "Nuestras Marcas"}</span>
+          <span className="text-[#b37600] font-semibold text-sm uppercase tracking-wider">{data?.sectionBadge || "Nuestras Marcas"}</span>
           <h2 className="text-3xl md:text-4xl font-extrabold text-[#2D3748] mt-2 mb-4">
             {data?.title || "Aliados de las"} <span className="text-[#1E4B8E]">{data?.titleHighlight || "Mejores Marcas"}</span>
           </h2>

@@ -106,7 +106,7 @@ export function ServicesSection({ data }: { data?: any }) {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
               >
                 <div className="w-14 h-14 bg-[#F7A600] rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                  <Icon className="h-8 w-8 text-white" />
+                  <Icon className="h-8 w-8 text-[#1E4B8E]" />
                 </div>
                 <h3 className="text-xl font-bold text-[#2D3748] mb-3">{service.title}</h3>
                 <p className="text-[#4A5568] leading-relaxed mb-4">{service.description}</p>

@@ -72,10 +72,42 @@ export function ContactSection({ data }: { data?: any }) {
     { src: "/images/screenshot-20180629-133933-2.png", caption: "Equipo de Construcción" }
   ]
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    console.log(formData)
-  }
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus('idle');
+
+    try {
+      const response = await fetch('/api/send', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        setSubmitStatus('success');
+        setFormData({
+          name: "",
+          email: "",
+          phone: "",
+          company: "",
+          message: "",
+        });
+      } else {
+        setSubmitStatus('error');
+      }
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      setSubmitStatus('error');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   const getImgSrc = (img: any, index: number) => {
     if (img?.image?.asset?._ref) return urlFor(img.image)?.url() || bottomImages[index].src
@@ -92,7 +124,7 @@ export function ContactSection({ data }: { data?: any }) {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
         >
-          <span className="text-[#F7A600] font-semibold text-sm uppercase tracking-wider">{data?.sectionBadge || "Contáctenos"}</span>
+          <span className="text-[#b37600] font-semibold text-sm uppercase tracking-wider">{data?.sectionBadge || "Contáctenos"}</span>
           <h2 className="text-3xl md:text-4xl font-extrabold text-[#2D3748] mt-2 mb-4">
             {data?.title || "¿Listo para"} <span className="text-[#1E4B8E]">{data?.titleHighlight || "Optimizar"}</span> {data?.titleSuffix || "su Operación?"}
           </h2>
@@ -132,7 +164,7 @@ export function ContactSection({ data }: { data?: any }) {
                       </div>
                       <div>
                         <p className="text-white/60 text-sm">{item.label}</p>
-                        <p className="font-semibold group-hover:text-[#F7A600] transition-colors duration-300">
+                        <p className="font-semibold group-hover:text-[#b37600] transition-colors duration-300">
                           {item.value}
                         </p>
                       </div>
@@ -195,7 +227,7 @@ export function ContactSection({ data }: { data?: any }) {
                     <label className="block text-sm font-medium text-[#4A5568] mb-2">Teléfono</label>
                     <Input
                       type="tel"
-                      placeholder="+57 300 000 0000"
+                      placeholder="300 000 0000"
                       value={formData.phone}
                       onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                       className="bg-[#F7F9FC] border-[#E2E8F0] focus:border-[#1E4B8E] focus:ring-[#1E4B8E]"
@@ -226,11 +258,22 @@ export function ContactSection({ data }: { data?: any }) {
                 <Button
                   type="submit"
                   size="lg"
-                  className="w-full bg-[#F7A600] hover:bg-[#FFBE3D] text-[#2D3748] font-bold text-lg py-6 group"
+                  disabled={isSubmitting}
+                  className="w-full bg-[#F7A600] hover:bg-[#FFBE3D] text-[#2D3748] font-bold text-lg py-6 group disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  Enviar Solicitud
-                  <Send className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                  {isSubmitting ? "Enviando..." : "Enviar Solicitud"}
+                  {!isSubmitting && <Send className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />}
                 </Button>
+                {submitStatus === 'success' && (
+                  <p className="text-green-600 font-semibold text-center mt-4">
+                    ¡Gracias! Su solicitud ha sido enviada correctamente.
+                  </p>
+                )}
+                {submitStatus === 'error' && (
+                  <p className="text-red-600 font-semibold text-center mt-4">
+                    Hubo un error al enviar su solicitud. Por favor intente nuevamente.
+                  </p>
+                )}
               </form>
             </div>
           </motion.div>
