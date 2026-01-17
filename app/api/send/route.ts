@@ -1,9 +1,14 @@
 import { Resend } from 'resend';
 import { NextResponse } from 'next/server';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 export async function POST(request: Request) {
+  const resendApiKey = process.env.RESEND_API_KEY;
+
+  if (!resendApiKey) {
+    return NextResponse.json({ error: 'RESEND_API_KEY is not defined' }, { status: 500 });
+  }
+
+  const resend = new Resend(resendApiKey);
   try {
     const body = await request.json();
     const { name, email, phone, company, message } = body;
