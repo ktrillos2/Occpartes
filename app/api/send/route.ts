@@ -5,6 +5,7 @@ export async function POST(request: Request) {
   const resendApiKey = process.env.RESEND_API_KEY;
 
   if (!resendApiKey) {
+    console.error('SERVER ERROR: RESEND_API_KEY is not defined');
     return NextResponse.json({ error: 'RESEND_API_KEY is not defined' }, { status: 500 });
   }
 
@@ -62,11 +63,13 @@ export async function POST(request: Request) {
     });
 
     if (error) {
+      console.error('RESEND API ERROR:', error);
       return NextResponse.json({ error }, { status: 500 });
     }
 
     return NextResponse.json(data);
   } catch (error) {
+    console.error('UNEXPECTED SERVER ERROR:', error);
     return NextResponse.json({ error }, { status: 500 });
   }
 }
